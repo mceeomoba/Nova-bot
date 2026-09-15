@@ -1,0 +1,17 @@
+[Unit]
+Description=Telegram notifier bot (digest / event alerts)
+After=network-online.target automaton-backend.service
+Wants=network-online.target
+Requires=automaton-backend.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/nova-backend
+EnvironmentFile=/root/nova-backend/.env
+ExecStart=/usr/bin/node /root/nova-backend/telegram/notifier-bot.ts
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

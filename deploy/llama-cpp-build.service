@@ -1,0 +1,16 @@
+[Unit]
+Description=Build llama.cpp (llama-server) if not already built
+After=network.target
+
+[Service]
+Type=oneshot
+# Idempotent — exits immediately if llama-server is already built, so
+# this costs nothing on every normal boot after the first one.
+#
+# ASSUMPTION, not a verified fact: this assumes you'll put this whole
+# deploy/ folder inside the agent repo clone at /root/nova/deploy/,
+# matching the other units' assumed /root/nova path. I don't actually
+# know where you plan to keep these unit files on the VM — if it's
+# somewhere else, change this ExecStart path to match.
+ExecStart=/root/nova/deploy/build-llama-cpp.sh
+RemainAfterExit=true

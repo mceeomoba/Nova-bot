@@ -1,0 +1,42 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+
+# Dependencies and package-manager caches
+node_modules/
+.pnpm-store/
+.yarn/
+.npm/
+
+# Generated build/test output
+dist/
+build/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+
+# Runtime and local data
+*.db
+*.sqlite
+*.sqlite3
+*.log
+logs/
+data/
+tmp/
+.cache/
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp

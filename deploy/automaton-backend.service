@@ -1,0 +1,18 @@
+[Unit]
+Description=Nova general backend (founder-controlled)
+After=network-online.target docker.service llama-qwen3-4b.service llama-vision.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/nova-backend
+EnvironmentFile=/root/nova-backend/.env
+ExecStart=/usr/bin/node /root/nova-backend/dist/index.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/root/nova-backend/data /root/nova-backend/logs /root/workspace
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,37 @@
+[Unit]
+Description=llama-server — vision model (SmolVLM2, browser screenshot perception)
+After=network.target llama-cpp-build.service
+Wants=llama-cpp-build.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/Downloads/AI-VM/llama.cpp
+
+# Same source-of-truth note as llama-qwen3-4b.service — filenames
+# confirmed against backend/deploy/vision-browser/start-local-models.sh
+# and against paths you confirmed directly. Same build-first requirement:
+# run deploy/build-llama-cpp.sh once before starting this unit.
+# --api-key-file expects a FILE containing just the key text, not the
+# key itself as a flag value (that would leak it into `ps aux` output
+# for anyone on the box). Create the file first:
+#   mkdir -p /etc/automaton
+#   echo -n "your-chosen-key-here" > /etc/automaton/vision-api-key
+#   chmod 600 /etc/automaton/vision-api-key
+#
+# CRITICAL: whatever key you put in that file MUST match
+# VISION_MODEL_API_KEY in backend/.env exactly — this file is what
+# llama-server checks incoming requests against, and VISION_MODEL_API_KEY
+# is what the backend sends. Different values = the backend's vision
+# requests get silently 401'd.
+ExecStart=/root/Downloads/AI-VM/llama.cpp/build/bin/llama-server \
+  -m /root/Downloads/AI-VM/vision/SmolVLM2-500M-Video-Instruct-Q8_0.gguf \
+  --mmproj /root/Downloads/AI-VM/vision/mmproj-SmolVLM2-500M-Video-Instruct-Q8_0.gguf \
+  --alias smolvlm2-500m --host 127.0.0.1 --port 8081 --ctx-size 4096 --parallel 2 \
+  --api-key-file /etc/automaton/vision-api-key --no-ui
+
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

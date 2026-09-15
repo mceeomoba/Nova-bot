@@ -1,0 +1,24 @@
+[Unit]
+Description=Nova root agent
+# Starts after the backend, not just network — the agent talks to the
+# backend over localhost immediately on boot (provisioning, inference),
+# so there's no point starting it before the backend can answer.
+After=network-online.target automaton-backend.service
+Wants=network-online.target
+Requires=automaton-backend.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/nova
+EnvironmentFile=/root/nova/.env
+ExecStart=/usr/bin/node /root/nova/dist/index.js --run
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+# The agent's sandbox/workspace root (VM_WORKDIR on the backend side,
+# same path) plus its own identity/config dir under $HOME.
+ReadWritePaths=/root/workspace /root/.automaton
+
+[Install]
+WantedBy=multi-user.target

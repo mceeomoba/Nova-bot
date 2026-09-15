@@ -1,0 +1,38 @@
+[Unit]
+Description=llama-server — Qwen3-4B (primary inference model)
+After=network.target llama-cpp-build.service
+Wants=llama-cpp-build.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/Downloads/AI-VM/llama.cpp
+
+# Values below are confirmed against the real script already in this
+# repo at backend/deploy/vision-browser/start-local-models.sh, and
+# against paths you confirmed directly (lowercase qwen3-4b, matching
+# the script). This unit is that script's logic translated into a
+# proper systemd service instead of a nohup'd background job, so
+# crashes get auto-restarted and logs go to journald instead of a flat
+# file.
+#
+# Needs the binary actually built first — llama.cpp/build/bin/llama-server
+# doesn't exist until you build it. Run deploy/build-llama-cpp.sh once
+# before starting this unit (it's a no-op if already built).
+#
+# --parallel 1, not 4 (the original vision-browser script used 4 for a
+# different context). I checked how llama-server actually divides
+# --ctx-size across --parallel slots: it's TOTAL context split evenly,
+# not per-slot. --ctx-size 8192 --parallel 4 was silently giving your
+# agent only 2048 real tokens per request, not 8192 — for one root
+# agent (not a multi-user server), there's no reason to split it, and
+# doing so was a real bug, not a tuning choice.
+ExecStart=/root/Downloads/AI-VM/llama.cpp/build/bin/llama-server \
+  -m /root/Downloads/AI-VM/qwen3-4b/Qwen3-4B-Q4_K_M.gguf \
+  --alias qwen3-4b --host 127.0.0.1 --port 8080 --ctx-size 8192 --parallel 1
+
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

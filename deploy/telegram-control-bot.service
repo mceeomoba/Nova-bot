@@ -1,0 +1,29 @@
+[Unit]
+Description=Telegram control bot (kill switch / agent commands)
+After=network-online.target automaton-backend.service
+Wants=network-online.target
+# Upgraded from a soft After= to a hard Requires= now that this bot
+# lives inside the backend repo itself (backend/telegram/) rather than
+# a separate standalone folder — it reads backend/.env directly and is
+# useless without the backend actually running.
+Requires=automaton-backend.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/nova-backend
+# Reads the SAME .env as the backend itself now — no separate
+# telegram/.env anymore. ADMIN_API_KEY is defined once, here, and both
+# the backend and this bot use that one value.
+EnvironmentFile=/root/nova-backend/.env
+# Confirmed directly (not assumed): Node 22's type-stripping runs this
+# .ts file as-is at actual runtime, despite `node --check` giving a
+# false-negative on the `!` non-null-assertion operator used in this
+# file — --check and real execution go through different parse paths.
+# No tsx needed.
+ExecStart=/usr/bin/node /root/nova-backend/telegram/control-bot.ts
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
