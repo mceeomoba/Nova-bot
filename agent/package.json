@@ -45,8 +45,8 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "test:coverage": "vitest run --coverage",
-    "test:security": "vitest run --grep 'security|injection|policy'",
-    "test:financial": "vitest run --grep 'financial|spend|treasury'",
+    "test:security": "vitest run --testNamePattern 'security|injection|policy'",
+    "test:financial": "vitest run --testNamePattern 'financial|spend|treasury'",
     "test:node": "tsx --test src/__tests__/alibaba-client.test.ts src/__tests__/alibaba-client-disk.test.ts",
     "test:ci": "vitest run --reporter=verbose && npm run test:node",
     "clean": "rm -rf dist && pnpm -r clean"

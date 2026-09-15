@@ -40,6 +40,7 @@ import { createLogger, setGlobalLogLevel, StructuredLogger } from "./observabili
 import { prettySink } from "./observability/pretty-sink.js";
 import { randomUUID } from "crypto";
 import { keccak256, toHex } from "viem";
+import { runEngineeringCli } from "./engineering/cli.js";
 
 const logger = createLogger("main");
 const VERSION = "0.2.1";
@@ -48,6 +49,11 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
 
   // ─── CLI Commands ────────────────────────────────────────────
+
+  if (args.includes("--engineering")) {
+    process.exitCode = runEngineeringCli(args);
+    return;
+  }
 
   if (args.includes("--version") || args.includes("-v")) {
     logger.info(`NOVA AUTOMATON v${VERSION}`);
@@ -70,6 +76,7 @@ Usage:
   automaton --tick-once    Run exactly one agent-loop tick against this
                            config dir and exit (ops/test harness — same
                            bootstrap and loop code --run uses)
+  automaton --engineering  Plan or run a policy-aware engineering workflow
   automaton --version      Show version
   automaton --help         Show this help
 
