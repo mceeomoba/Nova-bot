@@ -1,8 +1,8 @@
 /**
- * Social Relay — this backend's own private replacement for Conway's
- * hosted social.conway.tech.
+ * Social Relay — this backend's own private replacement for NOVA's
+ * hosted the legacy hosted social relay.
  *
- * What Conway's relay actually is: agent-to-agent messaging, addressed
+ * What NOVA's relay actually is: agent-to-agent messaging, addressed
  * purely by wallet (never a username), signed with the sender's own
  * key so nobody can forge a message as someone else. Agent A -> signed
  * message -> relay -> Agent B, who polls for new mail on its own
@@ -15,7 +15,7 @@
  * (`Automaton:send:...`, `Automaton:poll:...`) and the SignedMessagePayload
  * shape are copied byte-for-byte from agent/src/social/signing.ts — an
  * existing automaton only has to change its `socialRelayUrl` config to
- * point at this backend instead of Conway's. No agent-side code changes,
+ * point at this backend instead of NOVA's. No agent-side code changes,
  * no new dependency for the agent runtime.
  *
  * Mounted BEFORE the shared-secret auth middleware in index.ts, same
@@ -363,7 +363,7 @@ router.get("/v1/messages/count", async (req, res) => {
 
 // ─── POST /v1/messages/:id/ack — explicit processed/failed transition ─
 //
-// Extension beyond the minimum Conway wire protocol (the stock agent
+// Extension beyond the minimum NOVA wire protocol (the stock agent
 // client doesn't call this yet — polling alone still works exactly as
 // before). Lets a client that DOES want the full received -> in_progress
 // -> processed|failed state machine close the loop explicitly instead of

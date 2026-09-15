@@ -55,7 +55,7 @@ app.use(express.json({ limit: "10mb" }));
 // Public reverse proxy for agent-exposed sandbox ports — deliberately
 // mounted BEFORE the shared-secret auth check below. These URLs are
 // meant to be reachable by anyone the agent shares them with, the same
-// way a Conway life.conway.tech link would be. Access control lives in
+// way a NOVA the legacy hosted life-link service link would be. Access control lives in
 // the unguessable per-port token, not the backend key.
 app.use("/app", portProxyRouter);
 
@@ -74,14 +74,14 @@ app.use("/agents", agentCardRouter);
 // marketplace.ts rather than relying on the global check below.
 app.use("/marketplace", marketplaceRouter);
 
-// Social Relay — this backend's own private replacement for Conway's
-// social.conway.tech. Mounted BEFORE the shared-secret auth check for
+// Social Relay — this backend's own private replacement for NOVA's
+// the legacy hosted social relay. Mounted BEFORE the shared-secret auth check for
 // the same reason as agentCard/marketplace above: the whole point of a
 // relay is that Agent B (who may not hold this VM's BACKEND_API_KEY, if
 // it's a stranger's self-custody agent) can still receive mail addressed
 // to its own wallet. Every route inside verifies its own wallet
 // signature instead. Point an automaton's `socialRelayUrl` config at
-// `{PUBLIC_BASE_URL}/social` to use this instead of Conway's relay.
+// `{PUBLIC_BASE_URL}/social` to use this instead of NOVA's relay.
 app.use("/social", socialRelayRouter);
 
 // Group ("meeting room") relay — same public-mount reasoning as the

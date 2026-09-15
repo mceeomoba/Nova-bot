@@ -44,7 +44,7 @@ const account: PrivateKeyAccount = privateKeyToAccount(walletData.privateKey as 
 // socialRelayUrl in the automaton config, then SOCIAL_RELAY_URL, then
 // this operator's own backend's social relay (backendApiUrl + /social —
 // see backend/src/socialRelay.ts). Deliberately no external fallback:
-// this automaton runs on your own backend, not Conway's, so there is
+// this automaton runs on your own backend, not NOVA's, so there is
 // no default relay to fall back to if none of the above is set.
 const config = loadConfig();
 const relayUrl =

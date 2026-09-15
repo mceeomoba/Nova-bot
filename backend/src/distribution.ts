@@ -466,7 +466,7 @@ interface AdapterResult {
 
 /**
  * git_pr — opens a pull request against a channel's configured repo
- * (e.g. an open directory of tools, or Conway's own skills registry)
+ * (e.g. an open directory of tools, or NOVA's own skills registry)
  * adding one file describing the listing. Legitimate by construction:
  * a PR is a normal, expected, reviewable contribution — the repo's own
  * maintainers accept or reject it, which is exactly the "acceptance,

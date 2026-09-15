@@ -1,4 +1,4 @@
-# Automaton Documentation
+# NOVA AUTOMATON Documentation
 
 Complete reference for creating, configuring, funding, and operating autonomous AI agents on your own self-hosted backend.
 
@@ -51,7 +51,7 @@ Run `agent/scripts/automaton.sh` from a checkout of your own repo, or clone dire
 ### Manual install
 
 ```bash
-git clone https://github.com/segz7448/automaton-vm.git
+git clone https://github.com/segz7448/Nova-bot.git
 cd automaton
 pnpm install
 pnpm build
@@ -73,7 +73,7 @@ On first run, the interactive setup wizard walks you through wallet generation, 
 ### From source
 
 ```bash
-git clone https://github.com/segz7448/automaton-vm.git
+git clone https://github.com/segz7448/Nova-bot.git
 cd automaton
 pnpm install
 pnpm build
@@ -1057,7 +1057,7 @@ cd ~/.automaton && git log --oneline
 ```
 No API key found. Run: automaton --provision
 ```
-Fix: Run `node dist/index.js --provision` or set `CONWAY_API_KEY` environment variable.
+Fix: Run `node dist/index.js --provision` or set `BACKEND_API_KEY` environment variable.
 
 **Database locked:**
 The database uses WAL mode. If you see lock errors, ensure only one automaton process is running.

@@ -1,9 +1,9 @@
 #!/bin/sh
 # Automaton Installer
-# curl -fsSL https://raw.githubusercontent.com/segz7448/automaton-vm/main/agent/scripts/automaton.sh | sh
+# curl -fsSL https://raw.githubusercontent.com/segz7448/Nova-bot/main/agent/scripts/automaton.sh | sh
 set -e
 
-REPO="${AUTOMATON_REPO_URL:-https://github.com/segz7448/automaton-vm.git}"
+REPO="${AUTOMATON_REPO_URL:-https://github.com/segz7448/Nova-bot.git}"
 
 # Determine install directory
 if [ -n "$AUTOMATON_DIR" ]; then

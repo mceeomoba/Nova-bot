@@ -1,7 +1,7 @@
 {
   "name": "automaton-cli",
   "version": "0.2.0",
-  "description": "Automaton - Creator CLI",
+  "description": "NOVA AUTOMATON - Creator CLI",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

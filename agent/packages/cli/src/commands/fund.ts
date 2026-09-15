@@ -6,7 +6,7 @@
  * flow (a gasless EIP-3009 `transferWithAuthorization` on the
  * configured chain). Runs entirely against your own self-hosted
  * backend (`config.backendApiUrl` / `config.backendApiKey`) — no
- * Conway dependency, no Conway credits ledger. If the backend requires
+ * NOVA dependency, no NOVA credits ledger. If the backend requires
  * an active payment channel between these two addresses
  * (`paymentChannelRequired()` in `wallet.ts`), the sign step will fail
  * with a 403 until one is opened.

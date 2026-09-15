@@ -2,7 +2,7 @@
  * Self-Hosted Backend Client
  *
  * Talks to YOUR automaton-stack server (running on your own Alibaba Cloud
- * VM) instead of api.conway.tech. Implements the same BackendClient
+ * VM) instead of the legacy hosted API. Implements the same BackendClient
  * interface the rest of the agent code already depends on, so nothing
  * upstream (agent/tools.ts, replication/, etc.) needs to change shape —
  * only where the bytes go.
@@ -56,7 +56,7 @@ export class NotImplementedError extends Error {
   constructor(feature: string) {
     super(
       `${feature} is not available on this self-hosted backend yet. ` +
-        `This automaton runs on your own infrastructure, not Conway's — ` +
+        `This automaton runs on your own infrastructure, not NOVA's — ` +
         `this capability hasn't been built out on your VM yet.`,
     );
     this.name = "NotImplementedError";
@@ -221,7 +221,7 @@ export function createBackendClient(options: BackendClientOptions): BackendClien
   // ─── Wallet / "Credits" ─────────────────────────────────────────
   // There is no separate credits ledger here — the agent's real USDC
   // balance on Base IS its balance. We report it in "cents" (USD *100)
-  // so callers built around Conway's credits abstraction keep working.
+  // so callers built around NOVA's credits abstraction keep working.
 
   const getCreditsBalance = async (): Promise<number> => {
     const result = await request("GET", `/wallet/${agentAddress}/balance`);

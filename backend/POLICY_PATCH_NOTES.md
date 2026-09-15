@@ -1,6 +1,6 @@
 # Policy engine + injection defense — patch notes
 
-Two new files added to `agent-runtime/src/`, ported from Conway's
+Two new files added to `agent-runtime/src/`, ported from NOVA's
 `automaton-main` (`policy-engine.ts`, `policy-rules/*`, `injection-defense.ts`)
 and cut down to match your actual 13-tool surface instead of their 57.
 
@@ -51,7 +51,7 @@ and cut down to match your actual 13-tool surface instead of their 57.
   process itself — belt and suspenders, not a replacement for
   `MAX_INFERENCE_SPEND_USDC_PER_AGENT_PER_DAY`, the Docker sandbox
   limits, or `VM_ALLOWED_COMMANDS` in `automaton-backend`.
-- **No confirmation/quarantine tier.** Conway's engine has a
+- **No confirmation/quarantine tier.** NOVA's engine has a
   "quarantine" action (pause for human confirmation) for transfers
   above a threshold. This version only has allow/deny because your
   loop runs unattended with no confirmation channel — anything you'd
@@ -88,7 +88,7 @@ tool surface.
 - `constitution.md` — three immutable laws (never harm / earn your
   existence / never deceive), rewritten to reference this stack's real
   tools (`run_command`, `spawn_clone`, `update_soul`) instead of
-  Conway's. No tool in `agent-runtime` can write to this file —
+  NOVA's. No tool in `agent-runtime` can write to this file —
   `write_file`/`read_file` only touch the sandboxed VM workspace via
   the backend, not the local process directory this file lives in.
 
@@ -199,7 +199,7 @@ completion and returning output once.
 - No live streaming — `pty_read` is poll-based (call it, get what's
   accumulated since last read, or `full: true` for everything). A true
   streaming UI would need a websocket bridge, which is a separate,
-  larger piece — this matches Conway's own PTY tools, which are also
+  larger piece — this matches NOVA's own PTY tools, which are also
   poll-based for exactly this reason (agents call tools in a request/
   response loop, not over a persistent socket).
 - Session output does **not** currently get charged against any USDC

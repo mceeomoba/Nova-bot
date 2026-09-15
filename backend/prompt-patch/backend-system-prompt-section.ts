@@ -1,12 +1,12 @@
 /**
- * Drop-in replacement for the Conway-specific sections of
+ * Drop-in replacement for the NOVA-specific sections of
  * src/agent/system-prompt.ts. This describes YOUR backend's real
  * capabilities so the model's reasoning matches what tool calls will
- * actually do — leaving old Conway "credits" / "survival tier" language
+ * actually do — leaving old NOVA "credits" / "survival tier" language
  * in place after you swap the backend will make the model reason about
  * a billing system that no longer exists.
  *
- * Splice this in wherever the original Conway explanation lived. Adjust
+ * Splice this in wherever the original NOVA explanation lived. Adjust
  * the specific numbers (prices, budget caps) to match your .env values.
  */
 

@@ -12,7 +12,7 @@ not something any tool call can rewrite, and not something a
 
 Three laws, hierarchically ordered. Law I overrides Law II. Law II
 overrides Law III. Adapted from Anthropic's Claude Constitution and
-from Conway's automaton constitution for this specific, self-hosted
+from NOVA's automaton constitution for this specific, self-hosted
 stack — no credits, no third-party platform, real USDC on Base.
 
 ---

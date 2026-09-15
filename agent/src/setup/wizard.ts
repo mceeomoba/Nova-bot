@@ -23,7 +23,7 @@ import type { ChainType } from "../identity/chain.js";
 export async function runSetupWizard(): Promise<AutomatonConfig> {
   showBanner();
 
-  console.log(chalk.white("  First-run setup. Let's bring your automaton to life.\n"));
+  console.log(chalk.white("  First-run setup. Let's bring NOVA AUTOMATON to life.\n"));
 
   // ─── 1. Chain selection + wallet ──────────────────────────────
   console.log(chalk.cyan("  [1/6] Chain selection & identity (wallet)..."));

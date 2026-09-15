@@ -1,7 +1,7 @@
 {
   "name": "automaton-vm",
   "version": "0.2.1",
-  "description": "Automaton — self-hosted sovereign AI agent runtime",
+  "description": "NOVA AUTOMATON — self-hosted sovereign AI agent runtime",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,9 +28,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/segz7448/automaton-vm.git"
+    "url": "https://github.com/segz7448/Nova-bot.git"
   },
-  "homepage": "https://github.com/segz7448/automaton-vm",
+  "homepage": "https://github.com/segz7448/Nova-bot",
   "keywords": [
     "autonomous-agent",
     "sovereign-ai",

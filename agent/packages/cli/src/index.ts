@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Automaton CLI
+ * NOVA AUTOMATON CLI
  *
  * Creator-facing CLI for interacting with an automaton.
  * Usage: automaton-cli <command> [args]
@@ -28,7 +28,7 @@ async function main(): Promise<void> {
       break;
     default:
       console.log(`
-Automaton CLI - Creator Tools
+NOVA AUTOMATON CLI - Creator Tools
 
 Usage:
   automaton-cli status              Show automaton status

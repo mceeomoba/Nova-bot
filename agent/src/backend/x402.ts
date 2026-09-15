@@ -2,7 +2,7 @@
  * x402 Payment Protocol
  *
  * Enables the automaton to make USDC micropayments via HTTP 402
- * against our own self-hosted backend (not Conway's).
+ * against our own self-hosted backend (not NOVA's).
  * Adapted from backend-mcp/src/x402/index.ts
  */
 

@@ -1,6 +1,6 @@
 # Architecture
 
-Automaton is a sovereign AI agent runtime. An automaton owns an Ethereum wallet, pays for its own compute with USDC, and operates continuously inside a Linux VM sandbox or locally. If it cannot pay, it dies. This document describes every subsystem, their interactions, and how data flows through the runtime.
+NOVA AUTOMATON is a sovereign AI agent runtime. An automaton owns an Ethereum wallet, pays for its own compute with USDC, and operates continuously inside a Linux VM sandbox or locally. If it cannot pay, it dies. This document describes every subsystem, their interactions, and how data flows through the runtime.
 
 ## Table of Contents
 
@@ -507,13 +507,13 @@ Each automaton has a unique Ethereum identity:
 ## Backend Client
 
 **File:** `src/backend/client.ts` (error-fix.md Phase 11: this section
-previously described `src/conway/client.ts`, which talked to Conway's
+previously described `src/backend/client.ts`, which talked to NOVA's
 hosted API. That file was dead code — unused outside its own test —
-and has been deleted along with the rest of `src/conway/`; the still-
+and has been deleted along with the rest of `src/backend/`; the still-
 live generic on-chain/HTTP helpers that used to sit next to it moved to
 `src/chain-utils/`. See `MIGRATION-NOTES.md` for the full history.)
 
-The `BackendClient` interface (formerly `ConwayClient`) provides all
+The `BackendClient` interface (formerly `LegacyHostedClient`) provides all
 operations against your own self-hosted backend:
 
 - **Sandbox ops:** `exec`, `writeFile`, `readFile`, `exposePort`, `removePort`

@@ -503,7 +503,7 @@ export const config = {
   founderWalletAddress: process.env.FOUNDER_WALLET_ADDRESS || "",
   founderFeeBps: Number(process.env.FOUNDER_FEE_BPS || "2000"), // 2000 bps = 20%
 
-  // --- Social Relay (self-hosted replacement for Conway's social.conway.tech) ---
+  // --- Social Relay (self-hosted replacement for NOVA's the legacy hosted social relay) ---
   // These mirror agent/src/social/signing.ts's MESSAGE_LIMITS exactly, so a
   // stock agent client (which enforces the same numbers itself before it
   // ever calls the relay) never trips the server-side check on a

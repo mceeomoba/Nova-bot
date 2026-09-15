@@ -26,7 +26,7 @@ const PROVIDER_LABEL: Record<string, string> = {
 export async function runModelPicker(): Promise<void> {
   const config = loadConfig();
   if (!config) {
-    console.log(chalk.red("  Automaton is not configured. Run: automaton --setup"));
+    console.log(chalk.red("  NOVA AUTOMATON is not configured. Run: automaton --setup"));
     return;
   }
 

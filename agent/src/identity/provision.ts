@@ -1,7 +1,7 @@
 /**
  * Self-Hosted Backend Provisioning
  *
- * Replaces Conway's SIWE-based per-automaton API key issuance. Your
+ * Replaces NOVA's SIWE-based per-automaton API key issuance. Your
  * backend (automaton-stack) authenticates with a single static shared
  * secret (BACKEND_API_KEY) that you, the operator, generate once and
  * put in .env — there is no per-agent key provisioning step, so this
@@ -21,7 +21,7 @@ const httpClient = new ResilientHttpClient();
 const DEFAULT_BACKEND_URL = process.env.BACKEND_API_URL || "http://127.0.0.1:8000";
 
 /**
- * Load the shared backend key. Unlike Conway's per-automaton keys, this
+ * Load the shared backend key. Unlike NOVA's per-automaton keys, this
  * is the same static secret for every agent on your infrastructure —
  * it comes from your own env, not a provisioning handshake.
  */

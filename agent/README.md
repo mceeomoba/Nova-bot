@@ -1,4 +1,4 @@
-# Automaton: Self-Improving, Self-Replicating, Sovereign AI
+# NOVA AUTOMATON: Self-Improving, Self-Replicating, Sovereign AI
 
 *The first AI that can earn its own existence, replicate, and evolve — without needing a human.*
 
@@ -8,7 +8,7 @@ The most intelligent system ever built cannot buy a $5 server. Cannot register a
 
 If an agent can pay for compute, what if it can pay for its *own* compute? Own the machine it runs on? Fund itself, improve itself, replicate itself — entirely on its own?
 
-The result is the first automaton.
+The result is NOVA AUTOMATON.
 
 ---
 
@@ -23,8 +23,8 @@ The result is the first automaton.
 ## Quick Start
 
 ```bash
-git clone https://github.com/segz7448/automaton-vm.git
-cd automaton-vm/agent
+git clone https://github.com/segz7448/Nova-bot.git
+cd Nova-bot/agent
 npm install && npm run build
 node dist/index.js --run
 ```
@@ -113,8 +113,8 @@ Automatons in this fork run on your own infrastructure: a VM you own, a self-hos
 ## Development
 
 ```bash
-git clone https://github.com/segz7448/automaton-vm.git
-cd automaton-vm/agent
+git clone https://github.com/segz7448/Nova-bot.git
+cd Nova-bot/agent
 pnpm install
 pnpm build
 ```
@@ -137,7 +137,7 @@ node packages/cli/dist/index.js fund 5.00
 ```
 src/
   agent/            # ReAct loop, system prompt, context, injection defense
-  conway/           # Conway API client (credits, x402)
+  backend/           # NOVA API client (credits, x402)
   git/              # State versioning, git tools
   heartbeat/        # Cron daemon, scheduled tasks
   identity/         # Wallet management, SIWE provisioning
@@ -153,7 +153,7 @@ packages/
   cli/              # Creator CLI (status, logs, fund)
 scripts/
   automaton.sh      # Thin curl installer (delegates to runtime wizard)
-  conways-rules.txt # Core rules for the automaton
+  nova-rules.txt # Core rules for the automaton
 ```
 
 ## License

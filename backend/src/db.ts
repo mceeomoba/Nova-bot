@@ -557,14 +557,14 @@ CREATE TABLE IF NOT EXISTS listing_auth_nonces (
 );
 `);
 
-// --- Social Relay: this backend's own private replacement for Conway's
-// hosted social.conway.tech. Wire protocol, canonical signing strings,
+// --- Social Relay: this backend's own private replacement for NOVA's
+// hosted the legacy hosted social relay. Wire protocol, canonical signing strings,
 // and message shape are unchanged from agent/src/social/{client,signing,
 // protocol}.ts — an existing automaton only has to point socialRelayUrl
-// at this backend instead of Conway's relay; no agent-side code changes.
+// at this backend instead of NOVA's relay; no agent-side code changes.
 //
 // One row per message, addressed purely by wallet (from_address /
-// to_address), never a username — same as Conway. `status` implements
+// to_address), never a username — same as NOVA. `status` implements
 // the inbox state machine the agent runtime already types for
 // (InboxMessageStatus in agent/src/types.ts): received -> in_progress
 // -> processed, or failed after retry_count exceeds the configured max.

@@ -180,7 +180,7 @@ function printMainMenu(config: AutomatonConfig): void {
   const strategy = config.modelStrategy ?? DEFAULT_MODEL_STRATEGY_CONFIG;
 
   console.log(chalk.cyan("  ┌────────────────────────────────────────────┐"));
-  console.log(chalk.cyan("  │  Configure Automaton                        │"));
+  console.log(chalk.cyan("  │  Configure NOVA AUTOMATON                        │"));
   console.log(chalk.cyan("  └────────────────────────────────────────────┘"));
   console.log("");
   console.log(`  ${chalk.white("1.")} Inference Providers   ${dim(providers)}`);
@@ -316,7 +316,7 @@ async function configureGeneral(config: AutomatonConfig): Promise<void> {
 export async function runConfigure(): Promise<void> {
   const config = loadConfig();
   if (!config) {
-    console.log(chalk.red("  Automaton is not configured. Run: automaton --setup\n"));
+    console.log(chalk.red("  NOVA AUTOMATON is not configured. Run: automaton --setup\n"));
     return;
   }
 

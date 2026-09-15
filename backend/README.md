@@ -1,6 +1,6 @@
-# automaton-backend
+# NOVA AUTOMATON Backend
 
-Self-hosted replacement for Conway Cloud: agent wallets, an x402 facilitator
+Self-hosted replacement for NOVA Cloud: agent wallets, an x402 facilitator
 (payment verify/settle on Base), a local llama.cpp inference gateway metered in
 USDC, and local VM execution — all running as one service on your own
 Alibaba Cloud ECS instance.
@@ -146,17 +146,17 @@ curl http://YOUR_VM_IP:8080/wallet/0xADDRESS/balance \
 
 The `/inference/chat` 402 flow, and how an agent should sign the
 authorization and retry, is exactly what `src/chain-utils/x402.ts` in the
-automaton repo already implements — point `conwayApiUrl`-equivalent calls
-at `http://YOUR_VM_IP:8080` instead of `api.conway.tech`, and reuse that
+automaton repo already implements — point `legacyApiUrl`-equivalent calls
+at `http://YOUR_VM_IP:8080` instead of `the legacy hosted API`, and reuse that
 signing code as your client.
 
-## Making the agent actually not know about Conway
+## Making the agent actually not know about NOVA
 
-Pointing `conwayApiUrl` at your own backend is not enough by itself —
-in the automaton source, "Conway" is baked into more than the client:
+Pointing `legacyApiUrl` at your own backend is not enough by itself —
+in the automaton source, "NOVA" is baked into more than the client:
 
 - `src/agent/system-prompt.ts` — ~10 direct mentions in the text the
-  model actually reads every turn (explaining what Conway is, credits,
+  model actually reads every turn (explaining what NOVA is, credits,
   etc.)
 - `src/agent/tools.ts` and `src/setup/*.ts` — tool descriptions and
   setup wizard copy also reference it by name
@@ -164,19 +164,19 @@ in the automaton source, "Conway" is baked into more than the client:
 To fully decouple:
 1. Rewrite those system-prompt sections to describe *your* backend's
    capabilities (wallet, facilitator, inference, vm) instead of
-   Conway's credit system — the model conditions its behavior on
-   what the prompt tells it exists, so leftover Conway-specific
+   NOVA's credit system — the model conditions its behavior on
+   what the prompt tells it exists, so leftover NOVA-specific
    framing (e.g. "credits," "survival tier") will confuse it if the
    real backend no longer works that way. A ready-to-splice
    replacement is in `prompt-patch/backend-system-prompt-section.ts` —
-   paste its exported string into `system-prompt.ts` where the Conway
+   paste its exported string into `system-prompt.ts` where the NOVA
    explanation currently lives, and delete the old text.
-2. In `config.ts`/`types.ts`, rename `conwayApiUrl`/`conwayApiKey` to
+2. In `config.ts`/`types.ts`, rename `legacyApiUrl`/`legacyApiKey` to
    something neutral (`backendApiUrl`/`backendApiKey`) and point at
    `http://YOUR_VM_IP:8080`.
 3. Delete or no-op `identity/provision.ts`'s SIWE call to
-   `api.conway.tech` — your backend's `/wallet/create` replaces it.
-4. Strip `conway/x402.ts`'s hardcoded Conway-specific bits (it's
+   `the legacy hosted API` — your backend's `/wallet/create` replaces it.
+4. Strip `backend/x402.ts`'s hardcoded NOVA-specific bits (it's
    already generic EIP-3009 signing, so this is mostly just retargeting
    the URL, not rewriting logic).
 

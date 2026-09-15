@@ -16,7 +16,7 @@
   audit). No wildcard domain needed — it proxies by path token, not
   subdomain. Mounted *before* the shared-secret auth check in
   `index.ts` since these links are meant to be shareable, the same
-  trust model as a Conway `life.conway.tech` URL.
+  trust model as a NOVA `the legacy hosted life-link service` URL.
 - `vmService.ts` — new routes:
   - `POST /vm/sandboxes` — create an isolated sandbox (vcpu/memory/disk
     caps enforced from config, `MAX_SANDBOXES_PER_AGENT` enforced)

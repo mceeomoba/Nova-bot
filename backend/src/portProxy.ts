@@ -10,7 +10,7 @@
  *
  * Mounted BEFORE the shared-secret auth middleware in index.ts, since
  * these URLs are meant to be reachable by anyone the agent shares them
- * with — the same trust model as Conway's life.conway.tech links.
+ * with — the same trust model as NOVA's the legacy hosted life-link service links.
  */
 
 import express from "express";

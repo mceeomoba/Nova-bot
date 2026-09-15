@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Conway Automaton — 72-hour soak test runner
+# NOVA Automaton — 72-hour soak test runner
 # Usage: ./scripts/soak-test.sh [duration_hours] [db_path]
 
 DURATION_HOURS=${1:-72}

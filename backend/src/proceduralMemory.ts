@@ -7,7 +7,7 @@ import { db } from "./db.js";
  * changed only to: use crypto.randomUUID instead of the ulid package
  * (one less dependency), log to console instead of an external logger,
  * and scope every row to `agent_address` since one backend here serves
- * every agent + clone, not a single Conway-provisioned agent.
+ * every agent + clone, not a single NOVA-provisioned agent.
  */
 
 export interface ProceduralStep {

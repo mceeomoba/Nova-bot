@@ -66,7 +66,7 @@ publishes and stops.
 
 | method | what it does | credential? |
 |---|---|---|
-| `git_pr` | Opens a real PR (branch, file, PR) against a configured GitHub repo via the REST API — e.g. an open tool directory, or Conway's own `Conway-Research/skills` registry | yes, scoped PAT |
+| `git_pr` | Opens a real PR (branch, file, PR) against a configured GitHub repo via the REST API — e.g. an open tool directory, or NOVA's own `the upstream skills registry` registry | yes, scoped PAT |
 | `webhook` | POSTs structured JSON to a directory's own submission endpoint | optional |
 | `social_api` | POSTs to a documented REST "create post" endpoint (e.g. a self-owned Mastodon-compatible account) with mandatory disclosure appended | yes, required |
 | `package_registry` | Publishes a zip-mode listing's actual artifact to `npm`, `pypi`, `github_release`, or `vscode_marketplace` (sub-typed via `target.registry`) | yes, scoped token |
@@ -170,9 +170,9 @@ curl -X POST https://your-vm:8000/distribution/admin/channels \
   -H "Content-Type: application/json" \
   -d '{
     "key": "skills-registry-pr",
-    "name": "Conway-Research/skills directory",
+    "name": "the upstream skills registry directory",
     "method": "git_pr",
-    "target": { "owner": "Conway-Research", "repo": "skills", "branch": "main", "pathTemplate": "listings/{id}.md" },
+    "target": { "owner": "NOVA-Research", "repo": "skills", "branch": "main", "pathTemplate": "listings/{id}.md" },
     "requiresDisclosure": true,
     "requiresHumanCredential": true,
     "credentialEnvVar": "GITHUB_SKILLS_REGISTRY_PAT",

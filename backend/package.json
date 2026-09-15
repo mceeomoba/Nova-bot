@@ -2,7 +2,7 @@
   "name": "automaton-backend",
   "version": "0.1.0",
   "type": "module",
-  "description": "Self-hosted backend for autonomous agents: wallet, x402 facilitator, local llama.cpp inference gateway (OpenRouter fallback), local VM execution — replaces Conway Cloud.",
+  "description": "NOVA AUTOMATON self-hosted backend for autonomous agents: wallet, x402 facilitator, local llama.cpp inference gateway (OpenRouter fallback), local VM execution as a standalone service.",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",

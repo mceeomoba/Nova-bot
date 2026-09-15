@@ -5,12 +5,12 @@ self-hosted design except for one addition: **`spawn_clone` now actually
 launches the child process**, not just funds its wallet (see "What
 changed" below). Everything else — wallets, x402 USDC payments on Base,
 the OpenRouter gateway pointed at `ox-alpha`, the sandboxed VM — is the
-stock design, aimed at your infrastructure instead of Conway's.
+stock design, aimed at your infrastructure instead of NOVA's.
 
-No Conway dependency exists anywhere in this tree. `conwayApiUrl`,
-`api.conway.tech`, SIWE-via-Conway — none of it is here; this was written
+No NOVA dependency exists anywhere in this tree. `legacyApiUrl`,
+`the legacy hosted API`, SIWE-via-NOVA — none of it is here; this was written
 as a from-scratch backend + agent runtime, not a patched fork of the
-original `automaton-main` (which is 2.6MB of interlinked Conway-specific
+original `automaton-main` (which is 2.6MB of interlinked NOVA-specific
 code across ~70 files — replatforming that in place would mean rewriting
 most of it anyway, so this smaller purpose-built pair is the actual
 decoupled system, matching the design the original repo's own README
@@ -54,7 +54,7 @@ the founder agent.
 
 Beyond the stock episodic (auto-compaction) and semantic (`remember`/`recall`)
 layers, two more layers are ported in from `automaton-main/src/memory/`,
-adapted to drop their Conway/ULID dependencies and scope every row to
+adapted to drop their NOVA/ULID dependencies and scope every row to
 `agent_address` (so clones each get their own, not one shared store):
 
 - **Procedural memory** (`memory/procedural.ts` in the original) — reusable
@@ -72,7 +72,7 @@ colony system, and the skills loader/registry) are large enough that
 porting them well is its own separate pass, not a quick add-on. Say the
 word and I'll take the next one — orchestration is the biggest of the
 three and worth scoping on its own, since the original's planner is
-written for a Conway "agent colony" and needs real thought about what
+written for a NOVA "agent colony" and needs real thought about what
 that means for your single-founder-plus-clones setup rather than a
 mechanical port.
 

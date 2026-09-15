@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Conway Automaton — Database backup/restore tooling
+# NOVA Automaton — Database backup/restore tooling
 # Usage: ./scripts/backup-restore.sh <backup|restore|verify> [options]
 
 SQLITE3="${SQLITE3:-sqlite3}"

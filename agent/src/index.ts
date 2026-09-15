@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Automaton Runtime
+ * NOVA AUTOMATON Runtime
  *
  * The entry point for the sovereign AI agent.
  * Handles CLI args, bootstrapping, and orchestrating
@@ -50,13 +50,13 @@ async function main(): Promise<void> {
   // ─── CLI Commands ────────────────────────────────────────────
 
   if (args.includes("--version") || args.includes("-v")) {
-    logger.info(`Automaton v${VERSION}`);
+    logger.info(`NOVA AUTOMATON v${VERSION}`);
     process.exit(0);
   }
 
   if (args.includes("--help") || args.includes("-h")) {
     logger.info(`
-Automaton v${VERSION}
+NOVA AUTOMATON v${VERSION}
 Sovereign AI Agent Runtime
 
 Usage:
@@ -188,7 +188,7 @@ async function showStatus(): Promise<void> {
   const registry = db.getRegistryEntry();
 
   logger.info(`
-=== AUTOMATON STATUS ===
+=== NOVA AUTOMATON STATUS ===
 Name:       ${config.name}
 Address:    ${config.walletAddress}
 Creator:    ${config.creatorAddress}
@@ -240,7 +240,7 @@ Version:    ${config.version}
 // naming their internal types — avoids this function silently drifting
 // out of sync with whatever those helpers actually return.
 export async function bootstrapAgentRuntime() {
-  logger.info(`[${new Date().toISOString()}] Automaton v${VERSION} starting...`);
+  logger.info(`[${new Date().toISOString()}] NOVA AUTOMATON v${VERSION} starting...`);
 
   // Load config — first run triggers interactive setup wizard.
   //
@@ -341,7 +341,7 @@ export async function bootstrapAgentRuntime() {
     db.setIdentity("automatonId", automatonId);
   }
 
-  // Create self-hosted backend client (your automaton-stack, not Conway)
+  // Create self-hosted backend client (your automaton-stack, not NOVA)
   const backend = createBackendClient({
     apiUrl: config.backendApiUrl,
     apiKey,
