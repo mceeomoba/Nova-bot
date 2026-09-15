@@ -1,9 +1,10 @@
 name: CI
 
-# Assumes this workflow lives at the root of the agent/ workspace repo
-# (the "frontend" — pnpm workspace containing automaton-vm + the CLI
-# package). The backend deploys from a separate repo and isn't touched
-# here.
+# This workflow lives at the root of the Nova-bot monorepo. The agent/
+# directory is the pnpm workspace containing automaton-vm + the CLI
+# package (the "frontend"), so every run step executes with
+# working-directory: agent. The backend deploys from a separate area
+# and isn't touched here.
 on:
   push:
     branches: [main]
@@ -14,12 +15,20 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: agent
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        with:
+          # Point action-setup at the agent/ package.json, which pins
+          # "packageManager": "pnpm@10.28.1".
+          package_json_file: agent/package.json
         # No `version:` here on purpose — package.json already pins
         # "packageManager": "pnpm@10.28.1". Specifying a version here
         # too makes pnpm/action-setup refuse to run at all ("Multiple
@@ -32,6 +41,7 @@ jobs:
         with:
           node-version: "22"
           cache: "pnpm"
+          cache-dependency-path: agent/pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
