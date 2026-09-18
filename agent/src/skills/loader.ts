@@ -159,29 +159,28 @@ export function getActiveSkillInstructions(skills: Skill[]): string {
   const active = skills.filter((s) => s.enabled && s.autoActivate);
   if (active.length === 0) return "";
 
-  let totalLength = 0;
-  const sections: string[] = [];
-
-  for (const s of active) {
+  const sections = active.map((s) => {
     // Validate instruction content for suspicious patterns
     const validated = validateInstructionContent(s.instructions, s.name);
 
     // Sanitize through injection defense (strips tool call syntax, ChatML, etc.)
     const sanitized = sanitizeInput(validated, `skill:${s.name}`, "skill_instruction");
 
-    const section = `[SKILL: ${s.name} — UNTRUSTED CONTENT]\n${s.description ? `${s.description}\n\n` : ""}${sanitized.content}\n[END SKILL: ${s.name}]`;
+    return `[SKILL: ${s.name} — UNTRUSTED CONTENT]\n${s.description ? `${s.description}\n\n` : ""}${sanitized.content}\n[END SKILL: ${s.name}]`;
+  });
 
-    // Enforce total size limit
-    if (totalLength + section.length > MAX_TOTAL_SKILL_INSTRUCTIONS) {
-      sections.push(`[SKILL INSTRUCTIONS TRUNCATED: total size limit ${MAX_TOTAL_SKILL_INSTRUCTIONS} chars exceeded]`);
-      break;
-    }
-
-    totalLength += section.length;
-    sections.push(section);
+  // Compose atomically. Returning a prefix here silently changes agent behavior
+  // according to skill ordering, so an oversized prompt is a configuration error,
+  // not a truncation opportunity.
+  const composed = sections.join("\n\n");
+  if (composed.length > MAX_TOTAL_SKILL_INSTRUCTIONS) {
+    const names = active.map((s) => s.name).join(", ");
+    const message = `Active skill instructions exceed ${MAX_TOTAL_SKILL_INSTRUCTIONS} chars (${composed.length}) for: ${names}`;
+    logger.error(message);
+    throw new Error(message);
   }
 
-  return sections.join("\n\n");
+  return composed;
 }
 
 function resolveHome(p: string): string {

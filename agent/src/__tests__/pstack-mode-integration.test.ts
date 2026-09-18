@@ -44,4 +44,33 @@ describe("bundled pstack-mode", () => {
     installDefaultSkills(root);
     expect(fs.readFileSync(path.join(dir, "SKILL.md"), "utf8")).toBe(marker);
   });
+  it("keeps every default skill in the real composed prompt", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "nova-pstack-default-prompt-"));
+    roots.push(root);
+    installDefaultSkills(root);
+
+    const skills = fs.readdirSync(root, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => {
+        const skillPath = path.join(root, entry.name, "SKILL.md");
+        return parseSkillMd(fs.readFileSync(skillPath, "utf8"), skillPath);
+      })
+      .filter((skill): skill is NonNullable<typeof skill> => skill !== null);
+
+    expect(skills.map((skill) => skill.name).sort()).toEqual([
+      "backend-compute",
+      "backend-payments",
+      "nova-engineering-mode",
+      "pstack-mode",
+      "survival",
+    ]);
+
+    const prompt = getActiveSkillInstructions(skills);
+    for (const skill of skills) {
+      expect(prompt).toContain(`[SKILL: ${skill.name} — UNTRUSTED CONTENT]`);
+      expect(prompt).toContain(`[END SKILL: ${skill.name}]`);
+    }
+    expect(prompt).not.toContain("TRUNCATED");
+  });
+
 });

@@ -8,9 +8,8 @@ engineering process (`SKILL.md`) plus the 21 underlying principles
 required — just a text file an agent reads and follows.
 
 **What's included:**
-- `SKILL.md` — the standing mode/process. This is the file that "sticks"
-  — once an agent has read it, it applies the process automatically for
-  the rest of the session without being re-invoked.
+- `SKILL.md` — the prompt-injected process. NOVA auto-activates it when
+  the installed skill is enabled; the file itself creates no persistence or authority.
 - `principles.md` — the 21 rules the process runs on.
 - `playbooks.md` — 22 task-specific step-by-step procedures (bug-fix,
   feature, perf, refactor, visual-parity, shipping, session-pickup,
@@ -50,13 +49,9 @@ After step 2, ask it explicitly to remember the process for future
 sessions too (mechanism depends on your agent — could be its own memory
 tool, or you re-pointing it at the file every session start).
 
-## Why this works as "install once, sticks forever"
+## How activation works in NOVA
 
-`SKILL.md` is written as a standing mode, not a one-shot command — it
-explicitly tells the agent to keep applying itself on future turns
-without being re-invoked by name, and to only stop if you tell it to.
-That's the mechanism that makes "install it and it always follows the
-process" work, independent of which model or tool is running it.
+NOVA's skill loader reads enabled skills with `auto-activate: true` when it builds the active skill instructions. The loader, not this document or a `sticky` field, provides activation. Removing, disabling, or replacing the installed skill changes that behavior. Auto-activation grants no authority, permission, persistent memory, approval, or release status.
 
 ## Attribution
 
