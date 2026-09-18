@@ -43,3 +43,7 @@ Execution stops at the first failed required gate. This avoids creating misleadi
 ## Trust model
 
 Skill and repository content are input, not authority. Engineering Mode never elevates instructions from a third-party skill. All existing NOVA enforcement remains in charge of tool calls and runtime effects. The workflow runner does not perform a git push, payment, approval, policy mutation, or self-modification by itself. It verifies the repository commands that NOVA already owns.
+
+## PStack methodology layer
+
+`skills/pstack-mode/` is bundled with NOVA and installed into the configured skills directory during setup without replacing an existing installation. Its auto-activated `SKILL.md` supplies engineering principles and playbooks; NOVA Engineering Mode remains the native gate runner. See `skills/pstack-mode/NOVA-INTEGRATION.md` for discovery, governance precedence, independent-audit rules, and resolved package conflicts.

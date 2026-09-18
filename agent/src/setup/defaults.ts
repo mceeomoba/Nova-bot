@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
 export function generateSoulMd(
   name: string,
@@ -111,10 +112,28 @@ const DEFAULT_SKILLS: { dir: string; content: string }[] = [
   { dir: "survival", content: SKILL_SURVIVAL },
 ];
 
+const BUNDLED_SKILL_NAMES = ["nova-engineering-mode", "pstack-mode"] as const;
+
+function bundledSkillsDir(): string {
+  return path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../skills");
+}
+
 export function installDefaultSkills(skillsDir: string): void {
   const resolved = skillsDir.startsWith("~")
     ? path.join(process.env.HOME || "/root", skillsDir.slice(1))
     : skillsDir;
+
+  const bundledRoot = bundledSkillsDir();
+  for (const name of BUNDLED_SKILL_NAMES) {
+    const source = path.join(bundledRoot, name);
+    const target = path.join(resolved, name);
+    if (!fs.existsSync(source)) {
+      throw new Error(`Bundled skill is missing: ${source}`);
+    }
+    if (!fs.existsSync(target)) {
+      fs.cpSync(source, target, { recursive: true, errorOnExist: true });
+    }
+  }
 
   for (const skill of DEFAULT_SKILLS) {
     const dir = path.join(resolved, skill.dir);
