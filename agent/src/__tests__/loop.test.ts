@@ -19,6 +19,24 @@ import {
 } from "./mocks.js";
 import type { AutomatonDatabase, AgentTurn, AgentState } from "../types.js";
 
+// Agent-loop tests verify loop behavior, not live registry availability. Keep the
+// network boundary deterministic so the full suite never reaches public Base RPC.
+const registryDiscoveryMocks = vi.hoisted(() => ({
+  discoverAgents: vi.fn(async () => []),
+  searchAgents: vi.fn(async () => []),
+}));
+
+vi.mock("../registry/discovery.js", () => registryDiscoveryMocks);
+
+const chainBalanceMocks = vi.hoisted(() => ({
+  getUsdcBalance: vi.fn(async () => 0),
+}));
+
+vi.mock("../chain-utils/x402.js", async (importOriginal) => {
+  const original = await importOriginal<typeof import("../chain-utils/x402.js")>();
+  return { ...original, getUsdcBalance: chainBalanceMocks.getUsdcBalance };
+});
+
 describe("Agent Loop", () => {
   let db: AutomatonDatabase;
   let backend: MockBackendClient;

@@ -112,18 +112,16 @@ describe("getActiveSkillInstructions", () => {
     expect(result).toContain("[REMOVED:system_role_injection]");
   });
 
-  it("truncates when total size exceeds limit", () => {
-    // Create skills that together exceed 10,000 characters
+  it("fails loudly and atomically when total size exceeds limit", () => {
     const longInstructions = "A".repeat(6000);
     const skills = [
       makeSkill({ name: "skill-1", instructions: longInstructions }),
       makeSkill({ name: "skill-2", instructions: longInstructions }),
     ];
-    const result = getActiveSkillInstructions(skills);
-    expect(result).toContain("TRUNCATED");
-    // Should contain first skill but not second
-    expect(result).toContain("[SKILL: skill-1");
-    expect(result).not.toContain("[SKILL: skill-2 — UNTRUSTED CONTENT]\n");
+
+    expect(() => getActiveSkillInstructions(skills)).toThrow(
+      /Active skill instructions exceed 10000 chars.*skill-1, skill-2/,
+    );
   });
 
   it("handles multiple valid skills", () => {
